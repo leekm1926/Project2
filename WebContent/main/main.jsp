@@ -21,25 +21,6 @@
 		"" : request.getAttribute("ERROR_MSG") %>
 </span>
 
-<%
-//로그인 되었는지 확인하기 위해 세션영역에서 속성을 가져온다.
-if(session.getAttribute("id")==null){//로그인 전 상태..
-%>
-	<script>
-	//로그인 폼의 빈값체크를 위한 함수
-	function loginValidate(fn){
-		if(!fn.id.value){
-			alert("아이디를 입력하세요");
-			fn.id.focus();
-			return false;
-		}
-		if(fn.pass.value==""){
-			alert("패스워드를 입력하세요");
-			fn.pass.focus();
-			return false;
-		}
-	}
-	</script>
 <center>
 	<div id="wrap">
 		<%@ include file="../include/top.jsp"%>

@@ -9,9 +9,38 @@ DTO객체(Data Transfer Object)
  */
 public class MemberDTO {
 	//멤버변수
+	private String name;
 	private String id;
 	private String pass;
-	private String name;
+	private String tel;
+	private String phone;
+	private String email;
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+	private String grade;
 	private java.sql.Date regidate;
 	
 

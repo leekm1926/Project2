@@ -16,10 +16,10 @@ public class MemberDAO {
 	// 기본생성자를 통한 DB연결
 	public MemberDAO() {
 		String driver = "org.mariadb.jdbc.Driver";
-		String url = "jdbc:mariadb://127.0.0.1:3306/kosmo_db";
+		String url = "jdbc:mariadb://127.0.0.1:3306/suamil_db";
 		try {
 			Class.forName(driver);
-			String id = "kosmo_user";
+			String id = "suamil_user";
 			String pw = "1234";
 			con = DriverManager.getConnection(url, id, pw);
 			System.out.println("DB연결성공(디폴트생성자)");
