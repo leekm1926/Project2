@@ -12,7 +12,24 @@
   	<param-value>jdbc:mariadb://127.0.0.1:3306/suamil_db</param-value>
   </context-param>
   
+   <context-param>
+	  <param-name>MariaUser</param-name>
+	  <param-value>suamil_user</param-value>
+  </context-param>
+  <context-param>
+	  <param-name>MariaPass</param-name>
+	  <param-value>1234</param-value>
+  </context-param>
   
+  <servlet>
+		<servlet-name>MembershipWrite</servlet-name>
+		<servlet-class>model.MembershipWriteCtrl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MembershipWrite</servlet-name>
+		<url-pattern>/member/join02</url-pattern>
+	</servlet-mapping> 
+	
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

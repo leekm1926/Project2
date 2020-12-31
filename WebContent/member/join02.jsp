@@ -1,7 +1,193 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/global_head.jsp" %>
+<script type="text/javascript">
 
+
+function email_input(s,no){
+    form = document.registFrm;
+    sel = s[s.selectedIndex].value;
+    dis = 1;
+ 
+    if(sel=="user"){
+        sel = "";
+        dis = 0;
+    }
+ 
+    if(no==1){
+        form.email_2.value = sel;
+        form.email_2.disabled = dis;
+    }
+    
+}
+
+</script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        function zipFind() {
+            new daum.Postcode({
+                oncomplete: function (data) {
+                    //daum우편번호 API가 전달해주는 값을 콘솔에 입력
+                    console.log(data.zonecode);
+                    console.log(data.address);
+                    console.log(data.sido);
+                    console.log(data.sigungu);
+
+                    //가입폼에 적용하기
+                    var f = document.registFrm;
+                    f.zip2.value = data.zonecode;
+                    f.addr1.value = data.address;
+                    f.addr2.focus();
+                }
+            }).open();
+        }
+        </script>
+<script>
+var isValidate = function(frm){
+	 var num = /[0-9]/g;
+	 var spc = /[~!@#$%^&*()_+|<>?:{}]/g;  
+	
+	if(frm.name.value==''){
+         alert('이름을 입력해주세요');
+         frm.name.focus();
+         return false;
+     }
+    if(frm.id.value==''){
+         alert('아이디를 입력해주세요');
+         frm.id.focus();
+         return false;
+     }  
+     if(!frm.pass.value || !frm.pass2.value){
+         alert('패스워드를 입력해주세요');
+         return false;
+    } 
+     if(!num.test(frm.pass.value)){
+     	alert("숫자가 하나이상 포함되어야합니다");
+     	return false;
+     }
+     
+    if(frm.pass.value.length>11){
+    	   alert("비밀번호는 12자를 넘을수없습니다");
+    	   return false;
+    	   }
+    		 
+    	    if(frm.pass.value.length<4){
+    	   alert("비밀번호는 4자 이상어야합니다");
+    	   return false;
+    	   }
+     if(frm.pass.value != frm.pass2.value){
+         alert("입력한 패스워드가 일치하지않습니다");
+         frm.pass.value="";
+         frm.pass2.value="";
+         frm.pass.focus();
+         return false;
+    }
+     if(!frm.tel1.value || !frm.tel2.value || !frm.tel3.value){
+         alert('전화번호를 입력해주세요');
+         return false;
+     }
+     if(!frm.mobile1.value || !frm.mobile2.value || !frm.mobile3.value){
+         alert('휴대폰번호를 입력해주세요');
+         return false;
+     }
+     if(!frm.email_1.value || !frm.email_2.value){
+         alert('이메일주소 입력해주세요');
+         return false;
+     }
+     if(!frm.zip2.value){
+         alert('주소를 입력해주세요');
+         return false;
+     }
+     if(!frm.addr1.value){
+         alert('주소를 입력해주세요');
+         return false;
+     }
+     if(!frm.addr2.value){
+         alert('주소를 입력해주세요');
+         return false;
+     }
+     
+     if(frm.over.value!="중복확인완료"){
+    	 alert("중복체크를 하지않았습니다");
+    	 return false;
+     }
+     
+     if(frm.id.readOnly == false){
+    	 alert("중복체크를 하지않았습니다");
+    	 return false;
+     }
+     
+ 
+
+}
+</script>
+<script type="text/javascript">
+	
+function id_check_person(fn) {
+	
+
+	 var str = fn.id.value;
+	 var specialCheck = /[`~!@#$%^&*|\\\'\";:\/?]/;
+	 var idReg = /[a-zA-Z]/g;
+    var idReg2 = /^[0-9]/g; //는 숫자로 시작하는 아이디 판별
+    var idReg3 = /^[a-zA-Z]/g;
+    var idReg4 = /[0-9]/g;
+   
+    
+    
+    if(fn.id.value==""){
+    	//경고장을 띄우고....
+        alert("아이디를 입력후 중복확인을 누르세요");
+        //포커스를 이동한다.
+    	fn.id.focus();
+    }
+	 
+	 else if(!idReg4.test(str)){
+         alert("숫자를 포함해야합니다");
+         //포커스를 이동한다.
+     	fn.id.focus();
+     	}
+   else if(specialCheck.test(str)==true){
+    alert("특수문자를 사용할수 없습니다");
+    fn.id.focus();
+    }
+   else if(str.search(/\s/)!=-1){
+    alert("공백은 사용 할 수 없습니다");
+    fn.id.focus();
+    }
+	 
+   else if(str.length>11){
+   alert("아이디는 12자를 넘을수없습니다");
+   fn.id.focus();          
+   }
+	 
+   else if(str.length<4){
+   alert("아이디는 4자 이상어야합니다");
+   fn.id.focus();	 
+   }
+   else if(!idReg.test(str)){
+  	alert("영어만 사용가능합니다");
+   fn.id.focus();	 
+  	}
+   else if(idReg2.test(str)){
+   alert("첫글자는 영어만 사용가능합니다");
+   fn.id.focus();	 
+   } 
+   else if(!idReg3.test(str)){
+  	alert("영어만 사용가능합니다");
+   fn.id.focus();	 
+  	}
+   
+  	
+   else{
+	   fn.over.value = "중복확인완료";
+       window.open("id_overapping2.jsp?id="+fn.id.value,
+       "idover","width=500, height=300");
+   }
+	
+	
+}
+</script>
  <body>
 	<center>
 	<div id="wrap">
