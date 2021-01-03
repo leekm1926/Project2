@@ -95,6 +95,18 @@ public class MembershipDAO {
 		return maps;
 	}
 	
+	public void close() {
+		try {
+			//사용된 자원이 있다면 자원해제 해준다.
+			if(rs!=null) rs.close();
+			if(psmt!=null) psmt.close();
+			if(con!=null) con.close();
+		}
+		catch (Exception e) {
+			System.out.println("자원반납시 예외발생");
+		}
+	}
+	
 	public int insert(MembershipDTO dto) {
 		int affected = 0;
 		try {
@@ -103,18 +115,18 @@ public class MembershipDAO {
 			 해당 쿼리는 삭제한다
 			 */
 			String sql = " INSERT INTO membership ( "
-					+ " name, id ,pass, telephone ,cellphone  ,email , open_email , address, admin) "
+					+ " name, id ,pass, tel, phone, email, email_check , address, grade) "
 					+ " VALUES ( "
-					+ " ?,?,?,?,?,?,?,?,'F') ";
+					+ " ?,?,?,?,?,?,?,?,'1') ";
 			
 			psmt = con.prepareStatement(sql);
 			psmt.setString(1, dto.getName());
 			psmt.setString(2, dto.getId());
 			psmt.setString(3, dto.getPass());
-			psmt.setString(4, dto.getTelephone());
-			psmt.setString(5, dto.getCellphone() );
+			psmt.setString(4, dto.getTel());
+			psmt.setString(5, dto.getPhone() );
 			psmt.setString(6, dto.getEmail());
-			psmt.setString(7, dto.getOpen_email());
+			psmt.setString(7, dto.getEmail_check());
 			psmt.setString(8, dto.getAddress());
 			
 			/*

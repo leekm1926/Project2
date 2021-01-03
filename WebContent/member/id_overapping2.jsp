@@ -4,7 +4,7 @@
   <%
   String id = request.getParameter("id");
   MembershipDAO dao = new MembershipDAO();
-  boolean result = dao.idcheck(id);
+  boolean result = dao.idcheck1(id);
   
   if(result){
   %>

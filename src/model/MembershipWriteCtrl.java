@@ -1,13 +1,11 @@
 package model;
 
 import java.io.IOException;
-import java.sql.Date;
+
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.oreilly.servlet.MultipartRequest;
 
 public class MembershipWriteCtrl extends HttpServlet {
 
@@ -40,7 +38,7 @@ public class MembershipWriteCtrl extends HttpServlet {
 		String phone = req.getParameter("mobile1") + "-" + req.getParameter("mobile2") + "-"
 				+ req.getParameter("mobile3");
 		String email = req.getParameter("email_1") + "@" + req.getParameter("email_2");
-		String email_check = req.getParameter("open_email") == null ? "F" : "T";
+		String email_check = req.getParameter("email_check") == null ? "F" : "T";
 		String address = req.getParameter("zip2") + req.getParameter("addr1") + req.getParameter("addr2");
 
 		// DTO 객체에 위의 폼값을 저장한다
@@ -58,7 +56,7 @@ public class MembershipWriteCtrl extends HttpServlet {
 		MembershipDAO dao = new MembershipDAO();
 		dao.insert(dto);
 
-		dao.close(); 
+		dao.close();
 
 		req.getRequestDispatcher("../main/main.jsp").forward(req, resp);
 
