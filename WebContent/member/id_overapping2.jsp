@@ -1,23 +1,31 @@
 <%@page import="model.MembershipDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-  <%
-  String id = request.getParameter("id");
-  MembershipDAO dao = new MembershipDAO();
-  boolean result = dao.idcheck1(id);
-  
-  if(result){
-  %>
-  <center>
-	<br /><br />
+	pageEncoding="UTF-8"%>
+<%
+	String id = request.getParameter("id");
+MembershipDAO dao = new MembershipDAO();
+boolean result = dao.idcheck(id);
+
+dao.close();
+if (result) {
+%>
+<center>
+	<br /> <br />
 	<h2>이미 사용중인 아이디입니다</h2>
 </center>
-<%}else{ %>
-  <center>
-	<br /><br />
-	<h2> <%=id %> 사용할수 있는 아이디입니다</h2>
+<%
+	} else {
+%>
+<center>
+	<br /> <br />
+	<h2>
+		<%=id%>
+		사용할수 있는 아이디입니다
+	</h2>
 </center>
-<%} %>
+<%
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,43 +89,34 @@ function idUse() {
     		 return false;
          }  
     	 else{
-    		 <%
-    		 
-    		  boolean result2 = dao.idcheck(id);
-    		  
-    		  if(result){
-    		  %>
+    		 <%boolean result2 = dao.idcheck(id);
+
+if (result) {%>
     	
     		  spanTag.innerHTML="이미사용중인 아이디입니다";
     	
-    		<%}else{ %>
+    		<%} else {%>
  
-    			spanTag.innerHTML= " <%=id %>사용가능합니다 ";
+    			spanTag.innerHTML= " <%=id%> 사용가능합니다 ";
+<%}%>
+	}
+		location.href = './id_overapping2.jsp?id=' + str.value;
 
-    		<%} %>
-    	 }
- 	location.href='./id_overapping2.jsp?id='+str.value;
-	
-}
-function idUse1() {
-	
-		opener.document.registFrm.id.value=
-					document.overlapFrm.id.value;
+	}
+	function idUse1() {
+
+		opener.document.regiform.id.value = document.overlapFrm.id.value;
 		opener.document.getElementsByName("id")[0].readOnly = true;
-		
+
 		self.close();
-}
-
-
+	}
 </script>
 <body>
 	<form name="overlapFrm">
-	<input type="text" value="<%=request.getParameter("id") %>" name="id" size="20" />
-	
-	<input type="button" value="중복확인" onclick="idUse();" />
-	<input type="button" value="아이디사용하기" onclick="idUse1();" />
-	<br />
-	<span id="span" style="color: red;"> </span>
+		<input type="text" value="<%=request.getParameter("id")%>" name="id"
+			size="20" /> <input type="button" value="중복확인" onclick="idUse();" />
+		<input type="button" value="아이디사용하기" onclick="idUse1();" /> <br /> <span
+			id="span" style="color: red;"> </span>
 	</form>
 </body>
 </html>

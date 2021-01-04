@@ -2,7 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/global_head.jsp" %>
 
-
+<script type="text/javascript">
+   $(function() {
+      $('#agreeCheck').click(function() {
+         var checkCount = 0;
+         $("input[type='checkbox']:checked").each(function (idx) {
+                checkCount++;
+            });
+            if (checkCount!=1) {
+                alert("이용약관과 개인정보취급방침에 동의해주세요.");
+                return false;
+            }
+      });
+   });
+   </script>
  <body>
 	<center>
 	<div id="wrap">
@@ -479,7 +492,7 @@
 
 				<p style="text-align:center; margin-bottom:20px;"><input type="checkbox" name="agreement1" value="">이용약관과 개인정보취급방침에 동의합니다.</p>
 
-				<p style="text-align:center; margin-bottom:20px"><a href="join02.jsp"><img src="../images/btn01.gif" /></a>&nbsp;&nbsp;<a href="#"><img src="../images/btn02.gif" /></a></p>
+				<p style="text-align:center; margin-bottom:20px"><a href="join02.jsp" id="agreeCheck"><img src="../images/btn01.gif" /></a>&nbsp;&nbsp;<a href="#"><img src="../images/btn02.gif" /></a></p>
 
 
 			</div>
